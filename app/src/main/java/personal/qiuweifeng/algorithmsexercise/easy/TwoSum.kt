@@ -11,19 +11,30 @@ object TwoSum {
      * my solution
      */
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        var fistIndex = -1
-        var secondIndex = -1
         for(i in (nums.indices)) {
-            fistIndex = i
             for (j in ((i + 1) until nums.size)) {
-                secondIndex = j
                 if (nums[i] + nums[j] == target) {
-                    return intArrayOf(fistIndex, secondIndex)
+                    return intArrayOf(i, j)
                 }
             }
         }
         return intArrayOf(-1, -1)
     }
 
+
+    /**
+     * better solution with hashMap
+     */
+    fun twoSum2(nums: IntArray, target: Int): IntArray {
+        val hashMap = mutableMapOf<Int, Int>()
+        for (i in (nums.indices)) {
+            val value = target - nums[i]
+            if (hashMap.containsKey(value) && hashMap[value] != i) {
+                return intArrayOf(hashMap[value]!!, i)
+            }
+            hashMap[nums[i]] = i
+        }
+        return intArrayOf(-1, -1)
+    }
 
 }
